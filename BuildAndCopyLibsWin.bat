@@ -70,11 +70,13 @@ if '%choice%'=='' (
 
 :Start
 
-cmake -S "LibSWBF2/LibSWBF2" -B "LibSWBF2/LibSWBF2/build"
-cmake --build "LibSWBF2/LibSWBF2/build" --target ALL_BUILD --parallel --clean-first --config %mode% -- -verbosity:minimal -maxcpucount:%numThreads%
+echo %MsBuild%
 
-"%MsBuild%" LibSWBF2\LibSWBF2.NET\LibSWBF2.NET.csproj -verbosity:minimal /t:Rebuild /p:Platform="x64" /p:DefineConstants=WIN32 /p:configuration=%mode%
-"%MsBuild%" lua5.0-swbf2-x64\mak.vs2019\lua50_dll.vcxproj -verbosity:minimal /t:Rebuild /p:Platform="x64" /p:configuration=%mode%
+cmake -S "LibSWBF2/LibSWBF2" -B "LibSWBF2/LibSWBF2/build"
+cmake --build "LibSWBF2/LibSWBF2/build" --target ALL_BUILD --parallel --clean-first --config %mode% -- -verbosity:normal -maxcpucount:%numThreads%
+
+"%MsBuild%" LibSWBF2\LibSWBF2.NET\LibSWBF2.NET.csproj -verbosity:normal /t:Rebuild /p:Platform="x64" /p:DefineConstants=WIN32 /p:configuration=%mode%
+"%MsBuild%" lua5.0-swbf2-x64\mak.vs2019\lua50_dll.vcxproj -verbosity:normal /t:Rebuild /p:Platform="x64" /p:configuration=%mode%
 
 rem Copy built binaries to Unity project
 copy "LibSWBF2\LibSWBF2\build\%mode%\LibSWBF2.dll" "UnityProject\Assets\Lib\LibSWBF2.dll" /Y

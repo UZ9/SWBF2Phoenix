@@ -119,7 +119,7 @@ public class PhxEnvironment
         OnExecuteMain = null;
         OnLoaded = null;
         LuaRT?.Close();
-        EnvCon?.Delete();
+        // EnvCon?.Delete();
         EnvCon = null;
         PathToHandle.Clear();
         Debug.Log("PhxEnvironment destroyed");
